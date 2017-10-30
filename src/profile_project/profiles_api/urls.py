@@ -5,6 +5,7 @@ from . import views
 
 router = DefaultRouter()
 router.register('hello-viewset', views.HelloViewset, base_name='hello-viewset')
+router.register('profile', views.UserProfileViewSet)
 
 urlpatterns = [
     url(r'^hello-view/', views.HelloApi.as_view(), name='hello-view'),

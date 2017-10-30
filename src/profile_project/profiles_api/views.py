@@ -6,11 +6,28 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from . import serializers
+from . import models
 
 # Create your views here.
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """handle user profile creating"""
+
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+
+
+
+
+
+
+
+
+
+
 class HelloViewset(viewsets.ViewSet):
     """ Test Viewset api """
-    
+
     serializer_class = serializers.HelloSerializer
 
     def list(self, request):
