@@ -7,6 +7,7 @@ from rest_framework import status, filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from . import serializers
 from . import models
@@ -23,6 +24,17 @@ class LoginViewSet(viewsets.ViewSet):
         return ObtainAuthToken().post(request)
 
 
+class ProfileFeedViewSet(viewsets.ModelViewSet):
+    """Handles Creating, Redaing, Upadating, Profile Feed item."""
+
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.ProfileFeedSerializer
+    queryset = models.ProfileFeedItem.objects.all()
+    permission_classes = (permissions.PostOwnStatus, IsAuthenticatedOrReadOnly, IsAuthenticated)
+
+    def perform_create(self, serializer):
+        """Sets The User Profile to the logged in user"""
+        serializer.save(user_profile=self.request.user)
 
 
 

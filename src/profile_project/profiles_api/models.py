@@ -66,10 +66,10 @@ class ProfileFeedItem(models.Model):
     """Profile Status update."""
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     status_text = models.CharField(max_length=255)
-    updated_on = models.DateTimeField(auto_now_add=True)
-    created_on = models.DateTimeField(auto_now=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """Returns model as a string"""
         return self.status_text
-    
+
